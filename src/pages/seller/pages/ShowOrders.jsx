@@ -4,6 +4,7 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import AddedToCartSection from '../components/AddedToCartSection';
 import OutForDeliverySection from '../components/OutForDeliverySection';
+import CompletedOrderSection from '../components/OutForDeliverySection';
 
 const ShowOrders = () => {
 
@@ -17,17 +18,17 @@ const ShowOrders = () => {
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Added To Cart" {...a11yProps(0)} />
-          <Tab label="Out For Delivery" {...a11yProps(1)} />
-          <Tab label="Completed Orders" {...a11yProps(2)} />
-          <Tab label="Cancelled Orders" {...a11yProps(3)} />
+          <Tab label="Create Products" {...a11yProps(0)} />
+          <Tab label="Completed Orders" {...a11yProps(1)} />
+          {/* <Tab label="Completed Orders" {...a11yProps(2)} />
+          <Tab label="Cancelled Orders" {...a11yProps(3)} /> */}
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
         <AddedToCartSection />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <OutForDeliverySection />
+        <CompletedOrderSection />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
         0 Completed Orders

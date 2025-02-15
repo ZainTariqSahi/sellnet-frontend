@@ -156,6 +156,11 @@ const userSlice = createSlice({
             state.response = null;
             state.error = action.payload;
         },
+
+        resetStatus:(state,action)=>{
+            state.status=null;
+
+        },
         authLogout: (state) => {
             localStorage.removeItem('user');
             state.status = 'idle';
@@ -315,6 +320,7 @@ export const {
     removeAllFromCart,
     fetchProductDetailsFromCart,
     updateCurrentUser,
+    resetStatus
 } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;

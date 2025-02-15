@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addStuff } from '../../../redux/userHandle';
 import altImage from "../../../assets/altimg.png";
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import { resetStatus } from '../../../redux/userSlice';
 
 const AddProduct = () => {
 
@@ -27,6 +29,7 @@ const AddProduct = () => {
   const [loader, setLoader] = useState(false);
   const [message, setMessage] = useState("");
   const [showPopup, setShowPopup] = useState(false);
+  const navigate=useNavigate()
 
   const fields = {
     productName,
@@ -55,6 +58,14 @@ const AddProduct = () => {
       setLoader(false);
       setShowPopup(true);
       setMessage("Done Successfully");
+       // Delay navigation to let the popup show
+       setTimeout(() => {
+        navigate("/Seller/products");
+      }, 2000); // 
+
+      dispatch(resetStatus())
+
+      
     } else if (status === 'failed') {
       setMessage(response);
       setShowPopup(true);

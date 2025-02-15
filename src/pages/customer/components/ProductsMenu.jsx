@@ -34,14 +34,31 @@ const ProductsMenu = ({ dropName }) => {
     const handleClose = () => {
         setAnchorEl(null);
     };
-
-    const uniqueItems = productData.filter((data, index, self) => {
-        return (dropName === "Categories" ?
-            self.findIndex((item) => item.category === data.category) === index :
-            self.findIndex((item) => item.subcategory === data.subcategory) === index
-        );
-    });
-
+    const uniqueItems = (() => {
+        if (dropName === "Categories") {
+            const categorySet = new Set();
+            return productData.filter((item) => {
+                const normalizedCategory = item.category.trim().toLowerCase(); // Normalize names
+                if (!categorySet.has(normalizedCategory)) {
+                    categorySet.add(normalizedCategory);
+                    return true;
+                }
+                return false;
+            });
+        } else {
+            const subcategorySet = new Set();
+            return productData.filter((item) => {
+                const normalizedSubcategory = item.subcategory.trim().toLowerCase();
+                if (!subcategorySet.has(normalizedSubcategory)) {
+                    subcategorySet.add(normalizedSubcategory);
+                    return true;
+                }
+                return false;
+            });
+        }
+    })();
+    
+    
     const catHandler = (key) => {
         setAnchorEl(null);
         if (dropName === "Categories") {
@@ -55,6 +72,8 @@ const ProductsMenu = ({ dropName }) => {
         }
     }
 
+
+    
     return (
         <div style={{ marginLeft: "2rem" }}>
             <LightPurpleButton

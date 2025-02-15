@@ -183,6 +183,8 @@ export const getSpecificProducts = (id, address) => async (dispatch) => {
     dispatch(getRequest());
     try {
         const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/${address}/${id}`);
+
+        console.log("api")
         if (result.data.message) {
             dispatch(getSpecificProductsFailed(result.data.message));
         }
